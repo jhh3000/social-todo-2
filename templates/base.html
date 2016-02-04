@@ -4,17 +4,23 @@
 <head>
   <meta charset="utf-8">
   <title>{% block title %}CPSC113 Todo{% endblock title %}</title>
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.1.1/material.indigo-pink.min.css">
 </head>
 
 <body>
-  {% block content %} 
-  <div class="container">
-    <h1>CPSC113 Todo</h1>
+<main class="demo-main mdl-layout__content">
+  <div class="demo-container mdl-grid">
+      {% block content %} 
+      <div class="container">
+        <h1>CPSC113 Todo</h1>
+      </div>
+      {% endblock content %}
   </div>
-  {% endblock content %}
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  
+
+<a href="{% url 'logout' %}">Logout</a>
+  <script defer src="https://code.getmdl.io/1.1.1/material.min.js"></script>
 </body>
 
 </html>
