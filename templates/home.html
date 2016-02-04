@@ -23,29 +23,26 @@
 }
 </style>
 
-<form action="{% url 'home' %}" method="post">
+<form action="{% url 'login' %}" method="post">
 {% csrf_token %}
-<input type="hidden" name="action" value="login">
 <div class="demo-card-wide mdl-card mdl-shadow--2dp">
   <div class="mdl-card__title login">
     <h2 class="mdl-card__title-text">Login</h2>
   </div>
-  {{ login_form.non_field_errors }}
+  {{ login_error }}
   <div class="mdl-card__supporting-text">
     <div class="mdl-textfield mdl-js-textfield">
-      {{ login_form.email.errors }}
 			<input class="mdl-textfield__input" type="text" id="email" name="email">
 	    	<label class="mdl-textfield__label" for="email">Email</label>
 		</div>
 		<div class="mdl-textfield mdl-js-textfield">
-      {{ login_form.password.errors }}
 			<input class="mdl-textfield__input" type="password" id="password" name="password">
 	    	<label class="mdl-textfield__label" for="password">Password</label>
 		</div>
 	</form>
   </div>
   <div class="mdl-card__actions mdl-card--border">
-    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Submit</button>
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored log-in-submit">Submit</button>
   </div>
   <div class="mdl-card__menu">
     <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
@@ -55,39 +52,47 @@
 </div>
 </form>
 
-<form action="{% url 'home' %}" method="post">
-<input type="hidden" name="action" value="register">
+<form action="{% url 'register' %}" method="post">
 {% csrf_token %}
 <div class="demo-card-wide mdl-card mdl-shadow--2dp">
   <div class="mdl-card__title register">
     <h2 class="mdl-card__title-text">Register</h2>
   </div>
-  {{ registration_form.non_field_errors }}
+  {{ form.non_field_errors }}
+  {{ registration_error }}
   <div class="mdl-card__supporting-text">
     <div class="mdl-textfield mdl-js-textfield">
-      {{ registration_form.fl_name.errors }}
+      {% if form.fl_name.errors %}
+        <div class="validation-error"></div>
+      {% endif %}
 			<input class="mdl-textfield__input" type="text" id="fl_name" name="fl_name">
 	    	<label class="mdl-textfield__label" for="fl_name">First & Last Name</label>
 		</div>
 		<div class="mdl-textfield mdl-js-textfield">
-      {{ registration_form.email.errors }}
+      {% if form.email.errors %}
+        <div class="validation-error"></div>
+      {% endif %}
 			<input class="mdl-textfield__input" type="text" id="email" name="email">
 	    	<label class="mdl-textfield__label" for="email">Email</label>
 		</div>
 		<div class="mdl-textfield mdl-js-textfield">
-      {{ registration_form.password.errors }}
+      {% if form.password.errors %}
+        <div class="validation-error"></div>
+      {% endif %}
 			<input class="mdl-textfield__input" type="password" id="password" name="password">
 	    	<label class="mdl-textfield__label" for="password">Password</label>
 		</div>
 		<div class="mdl-textfield mdl-js-textfield">
-      {{ registration_form.password_confirmation.errors }}
+      {% if form.password_confirmation.errors %}
+        <div class="validation-error"></div>
+      {% endif %}
 			<input class="mdl-textfield__input" type="password" id="password_confirmation" name="password_confirmation">
 	    	<label class="mdl-textfield__label" for="password_confirmation">Password Confirmation</label>
 		</div>
 	</form>
   </div>
   <div class="mdl-card__actions mdl-card--border">
-    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Submit</button>
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored sign-up-submit">Submit</button>
   </div>
   <div class="mdl-card__menu">
     <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
