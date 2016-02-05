@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
-from .forms import UserLoginForm, UserRegistrationForm
+from .forms import UserRegistrationForm
 
 # Create your views here.
 
@@ -53,5 +53,5 @@ def register(request):
 			user.save()
 			return web_login(request)
 		else:
-			login_form = UserLoginForm()
+			login_form = UserRegistrationForm()
 	return render(request, template, {'form': form})
