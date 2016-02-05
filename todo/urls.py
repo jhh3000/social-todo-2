@@ -15,13 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from users.views import home, dashboard, login, logout, register
+from users.views import home, web_login, web_logout, register
+from tasks.views import dashboard, create, delete, toggle
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', home, name='home'),
-    url(r'^user/$', dashboard, name='dashboard'),
-    url(r'^user/login', login, name='login'),
-    url(r'^user/logout', logout, name='logout'),
+    url(r'^task/$', dashboard, name='dashboard'),
+    url(r'^user/login', web_login, name='login'),
+    url(r'^user/logout', web_logout, name='logout'),
     url(r'^user/register', register, name='register'),
 ]
