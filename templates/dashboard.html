@@ -4,6 +4,84 @@
 
 {% block content %}
 
-<h1>Welcome, {{ name }}</h1>
+	<h1>Welcome, {{ name }}</h1>
+
+	{% for task in task_list %}
+		{% if task.complete %}
+			<div class="tasks-list-item complete-task">complete
+				<span class="task-title">{{ task.title }}</span>
+			
+				{% if task.can_delete %}
+					<a href="{% url 'task_delete' task.id %}" class="delete-task">delete</a>
+				{% endif %}
+
+				<a href="{% url 'task_toggle' task.id %}" class="toggle-task">toggle</a>
+			</div>
+		{% else %}
+			<div class="tasks-list-item">in progress
+				<span class="task-title">{{ task.title }}</span>
+			
+				{% if task.can_delete %}
+					<a href="{% url 'task_delete' task.id %}" class="delete-task">delete</a>
+				{% endif %}
+
+				<a href="{% url 'task_toggle' task.id %}" class="toggle-task">toggle</a>
+			</div>
+		{% endif %}
+	{% endfor %}
+
+	{% if task_create_error %}
+		<p class="validation-error">{{ task_create_error }}</p>
+	{% endif %}
+
+	<form action="{% url 'task_create' %}" method="post">
+		{% csrf_token %}
+		<div class="demo-card-wide mdl-card mdl-shadow--2dp">
+		  <div class="mdl-card__title register">
+		    <h2 class="mdl-card__title-text">Create a Task</h2>
+		  </div>
+		  {{ form.non_field_errors }}
+		  <div class="mdl-card__supporting-text">
+		    <div class="mdl-textfield mdl-js-textfield">
+		      {% if form.title.errors %}
+		        <div class="validation-error"></div>
+		      {% endif %}
+					<input class="mdl-textfield__input" type="text" id="title" name="title">
+			    	<label class="mdl-textfield__label" for="title">Title</label>
+				</div>
+				<div class="mdl-textfield mdl-js-textfield">
+		      {% if form.description.errors %}
+		        <div class="validation-error"></div>
+		      {% endif %}
+					<textarea class="mdl-textfield__input" type="text" rows="5" id="description" name="description"></textarea>
+			    	<label class="mdl-textfield__label" for="description">Description</label>
+				</div>
+				<div class="mdl-textfield mdl-js-textfield">
+		      {% if form.collaborator1.errors %}
+		        <div class="validation-error"></div>
+		      {% endif %}
+					<input class="mdl-textfield__input" type="text" id="collaborator1" name="collaborator1">
+			    	<label class="mdl-textfield__label" for="collaborator1">Collaborator 1</label>
+				</div>
+				<div class="mdl-textfield mdl-js-textfield">
+		      {% if form.collaborator2.errors %}
+		        <div class="validation-error"></div>
+		      {% endif %}
+					<input class="mdl-textfield__input" type="text" id="collaborator2" name="collaborator2">
+			    	<label class="mdl-textfield__label" for="collaborator2">Collaborator 2</label>
+				</div>
+				<div class="mdl-textfield mdl-js-textfield">
+		      {% if form.collaborator3.errors %}
+		        <div class="validation-error"></div>
+		      {% endif %}
+					<input class="mdl-textfield__input" type="text" id="collaborator3" name="collaborator3">
+			    	<label class="mdl-textfield__label" for="collaborator3">Collaborator 3</label>
+				</div>
+		  </div>
+		  <div class="mdl-card__actions mdl-card--border">
+		    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored sign-up-submit" >Submit</button>
+		  </div>
+		</div>
+	</form>
 
 {% endblock content %}

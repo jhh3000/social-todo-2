@@ -21,8 +21,11 @@ from tasks.views import dashboard, create, delete, toggle
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', home, name='home'),
-    url(r'^task/$', dashboard, name='dashboard'),
     url(r'^user/login', web_login, name='login'),
     url(r'^user/logout', web_logout, name='logout'),
     url(r'^user/register', register, name='register'),
+    url(r'^task/$', dashboard, name='dashboard'),
+    url(r'^task/create', create, name='task_create'),
+    url(r'^task/delete/([0-9]+)/', delete, name='task_delete'),
+    url(r'^task/toggle/([0-9]+)/', toggle, name='task_toggle'),
 ]
