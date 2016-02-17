@@ -7,8 +7,8 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Task(models.Model):
-    title = models.CharField(max_length=256, blank=True, null=True)
-    description = models.CharField(max_length=256, blank=True, null=True)
+    title = models.TextField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
     user = models.ForeignKey(User, related_name='task')
     collaborator1 = models.ForeignKey(User, related_name='task_c1', null=True)
     collaborator2 = models.ForeignKey(User, related_name='task_c2', null=True)
